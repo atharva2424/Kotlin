@@ -1,0 +1,45 @@
+import java.util.*
+
+fun main(args: Array<String>) {
+    var result: Double =0.0
+    var sum = {a: Double , b: Double -> a + b }
+    var subtract = {a: Double , b: Double -> a - b }
+    var product = {a: Double , b: Double -> a * b }
+    var divide = {a: Double , b: Double -> a / b }
+    fun action(x:Double,y:Double, lmbd: (Double, Double) -> Double) {
+
+         result = lmbd(x,y)
+    }
+    val reader = Scanner(System.`in`)
+    print("Enter two numbers: ")
+    var first : Double= 0.0
+    var second: Double = 0.0
+    try {
+        first = reader.nextDouble()
+        second = reader.nextDouble()
+    }catch (ex:InputMismatchException)
+    {
+       print("not a valid number\n")
+       return
+    }
+
+
+    print("Enter an operator (+, -, *, /): ")
+    val operator = reader.next()[0]
+
+
+
+    when (operator) {
+        '+' -> action(first,second,sum)
+        '-' -> action(first,second,subtract)
+        '*' -> action(first,second,product)
+        '/' -> action(first,second,divide)
+        else -> {
+            print("Error! operator is not correct")
+            return
+        }
+    }
+    
+    print("${first} ${operator} ${second} = ${result}")
+}
+
